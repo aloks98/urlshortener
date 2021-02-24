@@ -100,6 +100,7 @@ urlAPIRouter.post("/api/anon_shorten", async (request, response, next) => {
     } else if (slug === "api" || slug === "url") {
       throw new Error("RESERVED", 400, "Sorry, Reserved keyword. 😖");
     } else {
+      slug = slug.toLowerCase();
       const existing = await Url.exists({ slug });
       if (existing) {
         throw new URLError("ALREADY_USED", 409, "Slug already in use. ☹");
